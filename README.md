@@ -117,7 +117,7 @@ Ejercicios
 
 	* Duración mínima razonable de los segmentos de voz y silencio.
 
-	Las duraciones mínimas corresponden a los segmentos más pequeños de voz y silencio.
+	* Las duraciones mínimas corresponden a los segmentos más pequeños de voz y silencio.
 	<img src="img/min_temp(S).png" width="640" align="center">
 	<img src="img/min_temp(V).png" width="640" align="center">
 	Tal como se puede ver en las gráficas de nuestra señal estos valores son:

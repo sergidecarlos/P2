@@ -122,6 +122,8 @@ Ejercicios
 	<img src="img/min_temps.PNG" width="640" align="center">
 
 	<img src="img/min_tempv.PNG" width="640" align="center">
+
+	
 	Tal como se puede ver en las gráficas de nuestra señal estos valores son:
 
 	Ts = 0.354 s

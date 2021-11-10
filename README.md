@@ -111,7 +111,19 @@ Ejercicios
 	* Incremento del nivel potencia en dB, respecto al nivel correspondiente al silencio inicial, para
 	  estar seguros de que un segmento de señal se corresponde con voz.
 
+	En potencia, tenemos un valor de silencio inicial de -6.57 dB, y de señal de voz un valor medio de 45 dB, por lo tanto el incremento de potencia en dB es de 51.57 dB.
+
+	El valor mínimo de incremento que podemos considerar es respecto a los sonidos de las consonantes sonoras, ya que representan un valor de potencia pequeño y a partir de este, podemos tener una cierta seguridad de que se trata de una señal de voz.
+
 	* Duración mínima razonable de los segmentos de voz y silencio.
+
+	Las duraciones mínimas corresponden a los segmentos más pequeños de voz y silencio.
+	<img src="img/min_temp(S).png" width="640" align="center">
+	<img src="img/min_temp(V).png" width="640" align="center">
+	Tal como se puede ver en las gráficas de nuestra señal estos valores son:
+
+	Ts = 0.354 s
+	Tv = 0.684 s
 
 	* ¿Es capaz de sacar alguna conclusión a partir de la evolución de la tasa de cruces por cero?
 

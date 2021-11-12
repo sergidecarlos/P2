@@ -117,9 +117,9 @@ Ejercicios
 
 	***~/PAV/P2$ wavesurfer pav_41101.wav***
 
-	Seleccionamos **Create Pane** -> **Data Plot** y, desde el panel creado, **Open Data File** y abrimos nuestros ficheros de datos.
+	Seleccionamos **Create Pane** -> **Data Plot** y, desde el panel creado, **Open Data File** abrimos nuestros ficheros de datos.
 
-	Hemos creado un panel *transcription* para añadir etiquetas a los diferentes segmentos de silencio (S) y de voz (V). Considerando como validas aquellas que se perciban claramente (no pausas cortas ni picos aislados).
+	Para la creación de etiquetas, hemos creado un panel *transcription* y hemos asignado a los diferentes segmentos de silencio la etiqueta **(S)** y para los de voz la etiqueta **(V)**. Además, solo hemos considerando como validas aquellas que se perciban claramente (no pausas cortas ni picos aislados).
 
 	El resultado son las siguientes gráficas para la señal temporal, el contorno de potencia y la tasa de cruces por cero, respectivamente:
 
@@ -143,17 +143,25 @@ Ejercicios
 	Las duraciones mínimas corresponden a los segmentos más pequeños de voz y silencio.
 
 	<kbd><img src="img/min_tempv.PNG" width="640" align="center"></kbd>
-	
+
 	<kbd><img src="img/min_temps.PNG" width="640" align="center"></kbd>
 
 	
-	Tal como se puede ver en las gráficas de nuestra señal estos valores son:
+	Tal como se puede ver en las gráficas de nuestra señal estos valores corresponden a la primera etiqueta de voz y a la segunda de silencio.
 
-	***Ts = 0.354 s***
-	***Tv = 0.684 s***
+	Para calcular estas duraciones ejecutamos el siguiente comando para visualizar los limites de cada etiqueta:
+
+	***~/PAV/P2$ cat pav_41101.lab***
+
+	<kbd><img src="img/cat_labels.PNG" width="640" align="center"></kbd>	
+
+	Por lo tanto, los tiempos mínimos requeridos son
+	**Tv = 0.684 s**
+	**Ts = 0.354 s**
 
 	* ¿Es capaz de sacar alguna conclusión a partir de la evolución de la tasa de cruces por cero?
 
+	Se puede observar con diferencia como aquellos picos del zcr corresponden a los sonidos sordos del habla, mientras que los sonidos sonoros tienen menor zcr.
 
 ### Desarrollo del detector de actividad vocal
 

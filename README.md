@@ -105,17 +105,29 @@ Ejercicios
   continuación, una captura de `wavesurfer` en la que se vea con claridad la señal temporal, el contorno de
   potencia y la tasa de cruces por cero, junto con el etiquetado manual de los segmentos.
 
-	Reutilizando el fichero grabado de la práctica 1 y guardándolo en nuevo directorio de trabajo (/PAV/P2) con el nombre *pav_41101.wav* ejecutamos el siguiente comando para abrirlo con wavesurfer:
+	Para una mayor precisión, reutilizando los ficheros y el programa *p1* empleado en la práctica 1, hacemos una copia de la grabación .wav con el nuevo nombre *pav_41101.wav* y generamos distintos ficheros con los datos de análisis de la potencia, amplitud y tasa de curces por cero.
+
+	***~/PAV/P1$ p1 pav_41101.wav | cut -f2 > pav_41101.pot***
+
+	***~/PAV/P1$ p1 pav_41101.wav | cut -f3 > pav_41101.amp***
+
+	***~/PAV/P1$ p1 pav_41101.wav | cut -f4 > pav_41101.zcr***
+
+	A continuación, guardamos los ficheros creados en nuestro nuevo directorio de trabajo (/PAV/P2) y ejecutamos el programa wavesurfer para representar las gráficas.
 
 	***~/PAV/P2$ wavesurfer pav_41101.wav***
+
+	Seleccionamos **Create Pane** -> **Data Plot** y, desde el panel creado, **Open Data File** y abrimos nuestros ficheros de datos.
 
 	Hemos creado un panel *transcription* para añadir etiquetas a los diferentes segmentos de silencio (S) y de voz (V). Considerando como validas aquellas que se perciban claramente (no pausas cortas ni picos aislados).
 
 	El resultado son las siguientes gráficas para la señal temporal, el contorno de potencia y la tasa de cruces por cero, respectivamente:
 
-	<kbd><img src="img/etiquetas_temp.PNG" width="640" align="center"></kbd>
+	<kbd><img src="img/labels_temp.PNG" width="640" align="center"></kbd>
 
-	<kbd><img src="img/etiquetas_pot.PNG" width="640" align="center"></kbd>	
+	<kbd><img src="img/labels_pot.PNG" width="640" align="center"></kbd>
+
+	<kbd><img src="img/labels_zcr.PNG" width="640" align="center"></kbd>	
 
 - A la vista de la gráfica, indique qué valores considera adecuados para las magnitudes siguientes:
 
@@ -130,14 +142,15 @@ Ejercicios
 
 	Las duraciones mínimas corresponden a los segmentos más pequeños de voz y silencio.
 
-	<img src="img/min_tempv.PNG" width="640" align="center">
-	<img src="img/min_temps.PNG" width="640" align="center">
+	<kbd><img src="img/min_tempv.PNG" width="640" align="center"></kbd>
+	
+	<kbd><img src="img/min_temps.PNG" width="640" align="center"></kbd>
 
 	
 	Tal como se puede ver en las gráficas de nuestra señal estos valores son:
 
-	Ts = 0.354 s
-	Tv = 0.684 s
+	***Ts = 0.354 s***
+	***Tv = 0.684 s***
 
 	* ¿Es capaz de sacar alguna conclusión a partir de la evolución de la tasa de cruces por cero?
 

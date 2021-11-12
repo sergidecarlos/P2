@@ -156,9 +156,7 @@ Ejercicios
 	<kbd><img src="img/cat_labels.PNG" align="center"></kbd>	
 
 	Por lo tanto, los tiempos mínimos requeridos son
-	**Tv = 0.684 s**
-
-	**Ts = 0.354 s**
+	**Tv = 0.684 s** y **Ts = 0.354 s**
 
 	* ¿Es capaz de sacar alguna conclusión a partir de la evolución de la tasa de cruces por cero?
 
@@ -168,6 +166,22 @@ Ejercicios
 
 - Complete el código de los ficheros de la práctica para implementar un detector de actividad vocal tan
   exacto como sea posible. Tome como objetivo la maximización de la puntuación-F `TOTAL`.
+
+	Primero de todo, generamos el fichero ***meson.build*** de nuestro proyecto *vad*.
+	En la primera línea, el nombre del proyecto.
+	A continuación,
+	- Nuestro programa a generar: vad
+	- Las direcciones de nuestros códigos fuentes: main_vad.c, vad.c, pav_analysis.c
+	- Las librerías con las que queremos enlazar: m y sndfile
+
+	El resultado es el siguiente:
+	
+	<kbd><img src="img/meson.build.PNG" align="center"></kbd>
+	
+	A continuación ejecutamos *meson* en el directorio y *ninja* para compilar:
+	
+	***~/PAV/P2$ meson bin***
+	***~/PAV/P2$ ninja -C bin***
 
 - Inserte una gráfica en la que se vea con claridad la señal temporal, el etiquetado manual y la detección
   automática conseguida para el fichero grabado al efecto. 

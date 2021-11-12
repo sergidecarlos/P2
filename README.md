@@ -123,11 +123,11 @@ Ejercicios
 
 	El resultado son las siguientes gráficas para la señal temporal, el contorno de potencia y la tasa de cruces por cero, respectivamente:
 
-	<kbd><img src="img/labels_temp1.PNG" width="640" align="center"></kbd>
+	<kbd><img src="img/labels_temp.PNG" width="640" align="center"></kbd>
 
-	<kbd><img src="img/labels_pot1.PNG" width="640" align="center"></kbd>
+	<kbd><img src="img/labels_pot.PNG" width="640" align="center"></kbd>
 
-	<kbd><img src="img/labels_zcr1.PNG" width="640" align="center"></kbd>	
+	<kbd><img src="img/labels_zcr.PNG" width="640" align="center"></kbd>	
 
 - A la vista de la gráfica, indique qué valores considera adecuados para las magnitudes siguientes:
 
@@ -173,11 +173,6 @@ Ejercicios
   continuación las tasas de sensibilidad (*recall*) y precisión para el conjunto de la base de datos (sólo
   el resumen).
   
-  También, editamos el fichero ***scripts/run_vad.sh*** para que el script llame al programa *vad*, y ejecute *scripts/run_vad.sh* y *scripts/vad_evaluation.pl* con los ficheros de la base de datos db.v4 para comprender su funcionamiento.
-  
-  El resultado es el siguiente:
-  
-  <kbd><img src="img/run_vad.PNG" align="center"></kbd>
 
 ### Trabajos de ampliación
 

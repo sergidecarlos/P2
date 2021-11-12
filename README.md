@@ -113,10 +113,9 @@ Ejercicios
 
 	El resultado son las siguientes gráficas para la señal temporal, el contorno de potencia y la tasa de cruces por cero, respectivamente:
 
-	<img src="img/etiquetas_temp.PNG" width="640" align="center">
-	<br />
+	<kbd><img src="img/etiquetas_temp.PNG" width="640" align="center"></kbd>
 
-	<img src="img/etiquetas_pot.PNG" width="640" align="center">	
+	<kbd><img src="img/etiquetas_pot.PNG" width="640" align="center"></kbd>	
 
 - A la vista de la gráfica, indique qué valores considera adecuados para las magnitudes siguientes:
 
@@ -131,8 +130,8 @@ Ejercicios
 
 	Las duraciones mínimas corresponden a los segmentos más pequeños de voz y silencio.
 
-	<img src="img/min_tempv.PNG" width="640" align="center"><br />
-	<img src="img/min_temps.PNG" width="640" align="center"><br />
+	<img src="img/min_tempv.PNG" width="640" align="center">
+	<img src="img/min_temps.PNG" width="640" align="center">
 
 	
 	Tal como se puede ver en las gráficas de nuestra señal estos valores son:

@@ -105,22 +105,33 @@ Ejercicios
   continuación, una captura de `wavesurfer` en la que se vea con claridad la señal temporal, el contorno de
   potencia y la tasa de cruces por cero, junto con el etiquetado manual de los segmentos.
 
+	Reutilizando el fichero grabado de la práctica 1 y guardándolo en nuevo directorio de trabajo (/PAV/P2) con el nombre *pav_41101.wav* ejecutamos el siguiente comando para abrirlo con wavesurfer:
+
+	***~/PAV/P2$ wavesurfer pav_41101.wav***
+
+	Hemos creado un panel *transcription* para añadir etiquetas a los diferentes segmentos de silencio (S) y de voz (V). Considerando como validas aquellas que se perciban claramente (no pausas cortas ni picos aislados).
+
+	El resultado son las siguientes gráficas para la señal temporal, el contorno de potencia y la tasa de cruces por cero, respectivamente:
+
+	<img src="img/etiquetas_pot.PNG" width="640" align="center">
+ 
+	<img src="img/etiquetas_temp.PNG" width="640" align="center">	
 
 - A la vista de la gráfica, indique qué valores considera adecuados para las magnitudes siguientes:
 
 	* Incremento del nivel potencia en dB, respecto al nivel correspondiente al silencio inicial, para
 	  estar seguros de que un segmento de señal se corresponde con voz.
 
-	En potencia, tenemos un valor de silencio inicial de -6.57 dB, y de señal de voz un valor medio de 45 dB, por lo tanto el incremento de potencia en dB es de 51.57 dB.
+	En potencia, tenemos un valor de silencio inicial de -6.57 dB, y de señal de voz un valor medio de 45 dB, por lo tanto el incremento medio de potencia en dB es de 51.57 dB.
 
-	El valor mínimo de incremento que podemos considerar es respecto a los sonidos de las consonantes sonoras, ya que representan un valor de potencia pequeño y a partir de este, podemos tener una cierta seguridad de que se trata de una señal de voz.
+	El valor mínimo de incremento que podemos considerar es respecto a los fonemas de las consonantes sonoras, ya que representan un valor de potencia pequeño (en comparación a los demás sonidos del habla) y a partir de este, podemos tener una cierta seguridad de que se trata de una señal de voz.
 
 	* Duración mínima razonable de los segmentos de voz y silencio.
 
 	Las duraciones mínimas corresponden a los segmentos más pequeños de voz y silencio.
 
 	<img src="img/min_temps.PNG" width="640" align="center">
-
+ 
 	<img src="img/min_tempv.PNG" width="640" align="center">
 
 	

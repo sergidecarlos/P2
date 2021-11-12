@@ -147,16 +147,16 @@ Ejercicios
 	<kbd><img src="img/min_temps.PNG" width="640" align="center"></kbd>
 
 	
-	Tal como se puede ver en las gráficas de nuestra señal estos valores corresponden a la primera etiqueta de voz y a la segunda de silencio.
+	Tal como se puede ver en las gráficas de nuestra señal estos valores corresponden a la primera etiqueta de voz y a la penúltima de silencio.
 
 	Para calcular estas duraciones ejecutamos el siguiente comando para visualizar los limites de cada etiqueta:
 
 	***~/PAV/P2$ cat pav_41101.lab***
 
-	<kbd><img src="img/cat_labels.PNG" align="center"></kbd>	
+	<kbd><img src="img/cat_labels_lab.PNG" align="center"></kbd>	
 
 	Por lo tanto, los tiempos mínimos requeridos son
-	**Tv = 0.684 s** y **Ts = 0.354 s**
+	**Tv = 0.684 s** y **Ts = 0.306 s**
 
 	* ¿Es capaz de sacar alguna conclusión a partir de la evolución de la tasa de cruces por cero?
 
@@ -167,42 +167,17 @@ Ejercicios
 - Complete el código de los ficheros de la práctica para implementar un detector de actividad vocal tan
   exacto como sea posible. Tome como objetivo la maximización de la puntuación-F `TOTAL`.
 
-	En esta parte de la práctica nos será últil los ficheros para el cómputo de análisis de la práctica 1. Por lo tanto, incorporamos al proyecto los ficheros de la primera práctica ***pav_analysis.c*** y ***pav_analysis.h***. Además hemos de incorporar las cabeceras necesarias en los ficheros correspondientes (*vad.c*).
-
-	Para empezar, generamos el fichero ***meson.build*** de nuestro proyecto *vad*.
-	En la primera línea, el nombre del proyecto.
-	En las siguientes,
-	- Nuestro programa a generar: vad
-	- Las direcciones de nuestros códigos fuentes: main_vad.c, vad.c, pav_analysis.c
-	- Las librerías con las que queremos enlazar: m y sndfile
-
-	El resultado es el siguiente:
-	
-	<kbd><img src="img/meson.build.PNG" align="center"></kbd>
-	
-	A continuación, ejecutamos *meson* en el directorio y *ninja* para compilar:
-	
-	***~/PAV/P2$ meson bin***
-
-	***~/PAV/P2$ ninja -C bin***
-
-	También, editamos el fichero ***scripts/run_vad.sh*** para que el script llame al programa *vad*, y ejecute *scripts/run_vad.sh* y *scripts/vad_evaluation.pl* con los ficheros de la base de datos db.v4 para comprender su funcionamiento.
-
-	El resultado es el siguiente:
-
-	<kbd><img src="img/run_vad.PNG" align="center"></kbd>
-
-
-- Inserte una gráfica en la que se vea con claridad la señal temporal, el etiquetado manual y la detección
-  automática conseguida para el fichero grabado al efecto. 
-
-
 - Explique, si existen. las discrepancias entre el etiquetado manual y la detección automática.
 
 - Evalúe los resultados sobre la base de datos `db.v4` con el script `vad_evaluation.pl` e inserte a 
   continuación las tasas de sensibilidad (*recall*) y precisión para el conjunto de la base de datos (sólo
   el resumen).
-
+  
+  También, editamos el fichero ***scripts/run_vad.sh*** para que el script llame al programa *vad*, y ejecute *scripts/run_vad.sh* y *scripts/vad_evaluation.pl* con los ficheros de la base de datos db.v4 para comprender su funcionamiento.
+  
+  El resultado es el siguiente:
+  
+  <kbd><img src="img/run_vad.PNG" align="center"></kbd>
 
 ### Trabajos de ampliación
 

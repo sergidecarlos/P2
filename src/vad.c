@@ -43,9 +43,8 @@ Features compute_features(const float *x, int N) {
    */
   Features feat;
   feat.zcr = compute_zcr(x, N, 16000);
-feat.p = compute_power(x, N);
-feat.am = compute_am(x, N);
-  //feat.zcr = feat.p = feat.am = (float) rand()/RAND_MAX;
+  feat.p = compute_power(x, N);
+  feat.am = compute_am(x, N);
   return feat;
 }
 

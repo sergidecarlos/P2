@@ -167,9 +167,11 @@ Ejercicios
 - Complete el código de los ficheros de la práctica para implementar un detector de actividad vocal tan
   exacto como sea posible. Tome como objetivo la maximización de la puntuación-F `TOTAL`.
 
-	Primero de todo, generamos el fichero ***meson.build*** de nuestro proyecto *vad*.
+	En esta parte de la práctica nos será últil los ficheros para el cómputo de análisis de la práctica 1. Por lo tanto, incorporamos al proyecto los ficheros de la primera práctica ***pav_analysis.c*** y ***pav_analysis.h***. Además hemos de incorporar las cabeceras necesarias en los ficheros correspondientes (*vad.c*).
+
+	Para empezar, generamos el fichero ***meson.build*** de nuestro proyecto *vad*.
 	En la primera línea, el nombre del proyecto.
-	A continuación,
+	En las siguientes,
 	- Nuestro programa a generar: vad
 	- Las direcciones de nuestros códigos fuentes: main_vad.c, vad.c, pav_analysis.c
 	- Las librerías con las que queremos enlazar: m y sndfile
@@ -178,10 +180,18 @@ Ejercicios
 	
 	<kbd><img src="img/meson.build.PNG" align="center"></kbd>
 	
-	A continuación ejecutamos *meson* en el directorio y *ninja* para compilar:
+	A continuación, ejecutamos *meson* en el directorio y *ninja* para compilar:
 	
 	***~/PAV/P2$ meson bin***
+
 	***~/PAV/P2$ ninja -C bin***
+
+	También, editamos el fichero ***scripts/run_vad.sh*** para que el script llame al programa *vad*, y ejecute *scripts/run_vad.sh* y *scripts/vad_evaluation.pl* con los ficheros de la base de datos db.v4 para comprender su funcionamiento.
+
+	El resultado es el siguiente:
+
+	<kbd><img src="img/run_vad.PNG" align="center"></kbd>
+
 
 - Inserte una gráfica en la que se vea con claridad la señal temporal, el etiquetado manual y la detección
   automática conseguida para el fichero grabado al efecto. 

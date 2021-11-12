@@ -142,9 +142,9 @@ Ejercicios
 
 	Las duraciones mínimas corresponden a los segmentos más pequeños de voz y silencio.
 
-	<kbd><img src="img/min_tempv1.PNG" width="640" align="center"></kbd>
+	<kbd><img src="img/min_tempv.PNG" width="640" align="center"></kbd>
 
-	<kbd><img src="img/min_temps1.PNG" width="640" align="center"></kbd>
+	<kbd><img src="img/min_temps.PNG" width="640" align="center"></kbd>
 
 	
 	Tal como se puede ver en las gráficas de nuestra señal estos valores corresponden a la primera etiqueta de voz y a la penúltima de silencio.
@@ -153,7 +153,7 @@ Ejercicios
 
 	***~/PAV/P2$ cat pav_41101.lab***
 
-	<kbd><img src="img/cat_labels_lab1.PNG" align="center"></kbd>	
+	<kbd><img src="img/cat_labels_lab.PNG" align="center"></kbd>	
 
 	Por lo tanto, los tiempos mínimos requeridos son
 	**Tv = 0.684 s** y **Ts = 0.306 s**
@@ -177,7 +177,7 @@ Ejercicios
   
   El resultado es el siguiente:
   
-  <kbd><img src="img/run_vad1.PNG" align="center"></kbd>
+  <kbd><img src="img/run_vad.PNG" align="center"></kbd>
 
 ### Trabajos de ampliación
 

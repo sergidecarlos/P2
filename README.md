@@ -188,11 +188,12 @@ Ejercicios
 	Una vez creado, ejecutamos meson y ninja para generar el programa en el directorio bin.
 
 	***~/PAV/P2$ meson bin***
+
 	***~/PAV/P2$ ninja -C bin***
 
 	A continuación, hemos completado el código de los ficheros *vad.h*, *vad.c* y *main_vad.c* completando las secciones comentadas por TODO y siguiendo las instrucciones del manual de prácticas.
 
-	###### TODOS LOS FICHEROS CÓDIGOS COMENTADOS PASO A PASO
+	###### Todos los ficheros código están comentados paso a paso
 
 	#### VAD.H
 
@@ -221,12 +222,12 @@ Ejercicios
 
 	Para la relación entre estados de la función *vad()* hemos seguido el siguiente esquema:
 
-	<kbd><img src="img/meson.build.PNG" align="center"></kbd>
+	<kbd><img src="img/FSA.PNG" align="center"></kbd>
 
 	- *ST_INIT*: 
 	Calculamos el umbral k0 a partir de la media de las primeras muestras hasta superar el incremento de potencia mínimo entre el ruido y el silencio.
 	A partir de aquí, consideramos el estado *ST_SILENCE*.
-
+	
 	Calculamos el umbral k1 como el resultado de restar el valor de potencia actaul -2dB, ya que el margen de silencio oscila unos 4dB y no sabemos con exactitud si la muestra actual es el valor medio de silencio. Por otro lado, calculamos k2 como el resultado de sumar a k1 5dB. De esta manera, estamos seguros que no estamos en silencio sino en voz.
 
 	- *ST_SILENCE*:
@@ -235,7 +236,7 @@ Ejercicios
 	- *ST_VOICE*:
 	Si el valor de potencia actual está por debajo del umbral de voz, pasamos al estado indefinido *ST_MAYBESILENCE*.
 
-	- *ST_MAYBESILENCE:
+	- *ST_MAYBESILENCE*:
 	Actualizamos el tiempo que estamos en este estado y si el valor de potencia actual es menor al umbral de voz y ha transcurrido un tiempo mayor a una pausa pasamos al estado *ST_VOICE*.
 	No obstante, si el valor de potencia es menor al umbral de silencio pasamos a *ST_SILENCE*.
 
@@ -259,7 +260,7 @@ Ejercicios
 
 	<kbd><img src="img/alineado.PNG" align="center"></kbd>
 
-	Como podemos ver las tasas para las tramas de silencio son buenas. No obstante, para el silencio disminuyen sobretodo para el F-score. Este problema alomejor se debe a la potencia de los istantes iniciales de nuestra señal de audio (próximas a 0), ya que el silencio lo determinan estas muestras.
+	Como podemos ver las tasas para las tramas de silencio son buenas. No obstante, para el silencio disminuyen sobretodo para el F-score. Este problema alomejor se debe a la potencia de los instantes iniciales de nuestra señal de audio (próximas a 0), ya que el silencio y el umbral k0 lo determinan estas muestras.
 
 
 - Explique, si existen. las discrepancias entre el etiquetado manual y la detección automática.

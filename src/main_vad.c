@@ -113,7 +113,7 @@ int main(int argc, char *argv[]) {
 
     if (sndfile_out != 0) {
       /* TODO: go back and write zeros in silence segments */
-      if(state==ST_SILENCE){
+      if(state == ST_SILENCE){
         sf_write_float(sndfile_out, buffer_zeros,frame_size);
 
       }

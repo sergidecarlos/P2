@@ -120,7 +120,7 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
 
       if(f.p > vad_data->last_feature + DIF_dB_SILENCE){ /* Inicio del estado Silencio */
         vad_data->k0 = vad_data->k0/vad_data->frame; /* Nivel medio de ref. del ruido de fondo en dB */
-        vad_data->k1 = f.p - 2; 
+        vad_data->k1 = f.p - 2;  /* Nivel medio de silencio en dB */
         vad_data->k2 = vad_data->k1 + 5;/* Nivel seguro de voz en dB*/
         vad_data->state = ST_SILENCE;
 

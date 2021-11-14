@@ -227,7 +227,6 @@ Ejercicios
 	- *ST_INIT*: 
 	Calculamos el umbral k0 a partir de la media de las primeras muestras hasta superar el incremento de potencia mínimo entre el ruido y el silencio.
 	A partir de aquí, consideramos el estado *ST_SILENCE*.
-	
 	Calculamos el umbral k1 como el resultado de restar el valor de potencia actaul -2dB, ya que el margen de silencio oscila unos 4dB y no sabemos con exactitud si la muestra actual es el valor medio de silencio. Por otro lado, calculamos k2 como el resultado de sumar a k1 5dB. De esta manera, estamos seguros que no estamos en silencio sino en voz.
 
 	- *ST_SILENCE*:
@@ -246,7 +245,7 @@ Ejercicios
 	#### MAIN_VAD.C
 
 	En este fichero, decimos que etiqueta se imprimirá según el estado.
-	Para los casos indefinidos *ST_MAYBESILENCE* y *ST_MAYBEVOICE* la decisión se realizará a partir del estado anterior. Es decir, si el estado actual es "ST_UNDEF" y el anterior era "ST_VOICE" se decidirá este último y analógo para *ST_SILENCE*.
+	Para los casos indefinidos *ST_MAYBESILENCE* y *ST_MAYBEVOICE* la decisión se realizará a partir del estado anterior. Es decir, si el estado actual es *ST_UNDEF* y el anterior era *ST_VOICE* se decidirá este último y analógo para *ST_SILENCE*.
 
 	Compilamos y ejecutamos el siguiente comando ejecutar nuestro programa vad con nuestro archivo de audio:
 
@@ -260,7 +259,7 @@ Ejercicios
 
 	<kbd><img src="img/alineado.PNG" align="center"></kbd>
 
-	Como podemos ver las tasas para las tramas de silencio son buenas. No obstante, para el silencio disminuyen sobretodo para el F-score. Este problema alomejor se debe a la potencia de los instantes iniciales de nuestra señal de audio (próximas a 0), ya que el silencio y el umbral k0 lo determinan estas muestras.
+	Como podemos ver las tasas para las tramas de voz son buenas. No obstante, para el silencio disminuyen sobretodo para el F-score. Este problema alomejor se debe a la potencia de los instantes iniciales de nuestra señal de audio (próximas a 0), ya que tenemos una señal alomejor muy bien grabada que no consta de una diferencia significante entre ruido y silencio y por lo tanto los umbrales se ven limitados.
 
 
 - Explique, si existen. las discrepancias entre el etiquetado manual y la detección automática.
@@ -276,9 +275,9 @@ Ejercicios
   continuación las tasas de sensibilidad (*recall*) y precisión para el conjunto de la base de datos (sólo
   el resumen).
 
-  <kbd><img src="img/alineado.db4.PNG" align="center"></kbd>
+  <kbd><img src="img/alineado_db4.PNG" align="center"></kbd>
 
-  En este caso, nuestro programa obtiene mejores resultados a partir de los ficheros .wav y sus referencias almacenados en *db.v4*.
+  En este caso, nuestro programa obtiene mejores resultados a partir de la base de datos de *db.v4*.
   
 
 ### Trabajos de ampliación
@@ -288,6 +287,18 @@ Ejercicios
 - Si ha desarrollado el algoritmo para la cancelación de los segmentos de silencio, inserte una gráfica en
   la que se vea con claridad la señal antes y después de la cancelación (puede que `wavesurfer` no sea la
   mejor opción para esto, ya que no es capaz de visualizar varias señales al mismo tiempo).
+
+  Para la cancelación de segmentos de ruido hemos editado el fichero *main_vad.c* y hemos añadido las siguientes líneas:
+
+  <kbd><img src="img/delete_noise.PNG" align="center"></kbd>
+
+  De esta manera, para los tramas de silencio añadimos un buffer de zeros.
+
+  Ejecutamos el siguiente comando para obtener la señal de salida con el silencido cancelado.
+
+  ***~/PAV/P2$ bin/vad -i pav_41101.wav -o pav_41101.vad -w silenced.wav***
+
+  <kbd><img src="img/silenced_wave.PNG" align="center"></kbd>
 
 #### Gestión de las opciones del programa usando `docopt_c`
 
@@ -303,6 +314,12 @@ Ejercicios
 - Si lo desea, puede realizar también algún comentario acerca de la realización de la práctica que
   considere de interés de cara a su evaluación.
 
+  A modo de conclusión, evidentemente los resultados son mucho mejor que los resultados iniciales del 50% (aproximadamente).
+  No obstante, el reto principal ha sido con las primeras muestras de la señal. Ya que a partir de esta, se obtienen los diferentes umbrales que definen los estados.
+
+  Por lo general, con nuestro código el análisis de voz de la base de datos es alto. Tenemos un recall del 91% y un F-score del 89%. Mientras que el análisis para las muestras de silencio disminuyen un poco con un 72%  y 82% respectivamente.
+
+  Son buenos resultados, pero nos hubiese gustado obtener de mejores como se esperaba, por lo menos en la detección de silencio, pero seguro que de haber señales no tan bien grabadas en la base de datos, como por ejemplo por auriculares con cancelación de ruido, etc., nuestro código hubiese funcionado mejor.
 
 ### Antes de entregar la práctica
 

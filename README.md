@@ -134,9 +134,12 @@ Ejercicios
 	* Incremento del nivel potencia en dB, respecto al nivel correspondiente al silencio inicial, para
 	  estar seguros de que un segmento de señal se corresponde con voz.
 
-	En potencia, tenemos un valor de silencio inicial de -6.57 dB, y de señal de voz un valor medio de 45 dB, por lo tanto el incremento medio de potencia en dB es de ***51.57 dB***.
+	En potencia, al inicio tenemos un valor medio de ruido inicial de **-8.5 dB**, cuando se estabiliza la señal tenemos un silencio medio de **-4.5 dB** y de señal de voz un valor medio de **45 dB**.
+	Por lo tanto, el incremento medio de potencia entre el ruido inicial y el silencio es de ***4 dB***, y el incremento medio de potencia entre el silencio y la señal de voz es ***49.5 dB***.
 
-	El valor mínimo de incremento que podemos considerar es respecto a los fonemas de las consonantes sonoras, ya que representan un valor de potencia pequeño (en comparación a los demás sonidos del habla) y a partir de este, podemos tener una cierta seguridad de que se trata de una señal de voz.
+	No obstante, para tener una cierta certesa que se trata de un tramo de voz el valor mínimo de incremento que podemos considerar es respecto a los fonemas de las consonantes sonoras, de esta manera cualquier incremento superior a este se tratará de una señal de voz.
+
+	En nuestro caso, las consonantes sonoras tienen un valor medio de potencia de **0.5 dB**, por lo tanto el incremento de nivel de potencia mínimo es ***5 dB***.
 
 	* Duración mínima razonable de los segmentos de voz y silencio.
 
@@ -158,20 +161,123 @@ Ejercicios
 	Por lo tanto, los tiempos mínimos requeridos son
 	**Tv = 0.684 s** y **Ts = 0.306 s**
 
+	No obstante, también existen pequeñas pausas al hablar que determinan si hemos acabado de hablar. Podemos considerar estas como ***Tpause = 0.05 s***.
+
 	* ¿Es capaz de sacar alguna conclusión a partir de la evolución de la tasa de cruces por cero?
 
-	Se puede observar con diferencia como aquellos picos del zcr corresponden a los sonidos sordos del habla, mientras que los sonidos sonoros tienen menor zcr.
+	Se puede observar con diferencia como aquellos picos del zcr corresponden a los sonidos sordos del habla, mientras que los sonidos sonoros tienen menor amplitud de zcr.
 
 ### Desarrollo del detector de actividad vocal
 
 - Complete el código de los ficheros de la práctica para implementar un detector de actividad vocal tan
   exacto como sea posible. Tome como objetivo la maximización de la puntuación-F `TOTAL`.
 
+	Hemos recuperado los ficheros *pav_analysis.c* y *pav_analysis.h* (para el computo de potencia) y los hemos copiado en nuestro directorio *src*.
+
+	Además, hemos creado el fichero ***meson.build*** de la siguiente manera:
+	- En la primera línea el nombre de nuestro proyecto.
+	- En las siguientes líneas las variables y elementos principales de nuestro programa:
+		+ Nombre del programa: *vad*
+		+ Códigos fuentes: *main_vad.c*, *vad.c* y *pav_analysis.c*
+		+ Librerías útiles: *m* y *sndfile*
+	
+	El resultado es el siguiente:
+
+	<kbd><img src="img/meson.build.PNG" align="center"></kbd>
+
+	Una vez creado, ejecutamos meson y ninja para generar el programa en el directorio bin.
+
+	***~/PAV/P2$ meson bin***
+	***~/PAV/P2$ ninja -C bin***
+
+	A continuación, hemos completado el código de los ficheros *vad.h*, *vad.c* y *main_vad.c* completando las secciones comentadas por TODO y siguiendo las instrucciones del manual de prácticas.
+
+	###### TODOS LOS FICHEROS CÓDIGOS COMENTADOS PASO A PASO
+
+	#### VAD.H
+
+	Hemos añadido dos estados internos para los estados indefinidos
+	- *ST_MAYBESILENCE*: Cuando el estado actual es Voz y el valor de potencia disminuye por debajo del umbral.
+	- *ST_MAYBEVOICE*: Análogamente, cuando el estado actual es Silencio y el valor de potencia supera el umbral.
+
+	Hemos definido nuevas variables
+	Para los umbrales,
+	- *k0*: Umbral de referencia inicial
+	- *k1*: Umbral de referencia silencio
+	- *k2*: Umbral de referencia señal de voz
+
+	<kbd><img src="img/thresholds.PNG" align="center"></kbd>
+
+	También, hemos creado la variable *frame* que indica el número de trama leída y que nos servirá para el cómputo del valor de potencia medio inicial (k0).
+
+	#### VAD.C
+
+	Hemos definido nuevas constantes
+	- *DIF_dB_SILENCE*: Incremento mínimo entre la señal de voz y el silencio que obtuvimos en el ejercicio anterior en dB.
+	- *PAUSES*: Duración miníma de una pausa al hablar en ms.
+	- *FM*: Frecuencia de muestreo de la señal de entrada .wav  en Hz.
+
+	Inicializamos todas las variables nuevas a 0 y creamos un objeto potencia llamado *p* a partir del cálculo de la potencia media del fichero *pav_analysis.c*. Este objeto tomará cada muestra de nuestro fichero de audio e irá calculando su potencia.
+
+	Para la relación entre estados de la función *vad()* hemos seguido el siguiente esquema:
+
+	<kbd><img src="img/meson.build.PNG" align="center"></kbd>
+
+	- *ST_INIT*: 
+	Calculamos el umbral k0 a partir de la media de las primeras muestras hasta superar el incremento de potencia mínimo entre el ruido y el silencio.
+	A partir de aquí, consideramos el estado *ST_SILENCE*.
+
+	Calculamos el umbral k1 como el resultado de restar el valor de potencia actaul -2dB, ya que el margen de silencio oscila unos 4dB y no sabemos con exactitud si la muestra actual es el valor medio de silencio. Por otro lado, calculamos k2 como el resultado de sumar a k1 5dB. De esta manera, estamos seguros que no estamos en silencio sino en voz.
+
+	- *ST_SILENCE*:
+	Si el valor de potencia actual es mayor que el umbral de silencio, pasamos al estado indefinido *ST_MAYBEVOICE*.
+
+	- *ST_VOICE*:
+	Si el valor de potencia actual está por debajo del umbral de voz, pasamos al estado indefinido *ST_MAYBESILENCE*.
+
+	- *ST_MAYBESILENCE:
+	Actualizamos el tiempo que estamos en este estado y si el valor de potencia actual es menor al umbral de voz y ha transcurrido un tiempo mayor a una pausa pasamos al estado *ST_VOICE*.
+	No obstante, si el valor de potencia es menor al umbral de silencio pasamos a *ST_SILENCE*.
+
+	- *ST_MAYBEVOICE*:
+	Análogo.
+
+	#### MAIN_VAD.C
+
+	En este fichero, decimos que etiqueta se imprimirá según el estado.
+	Para los casos indefinidos *ST_MAYBESILENCE* y *ST_MAYBEVOICE* la decisión se realizará a partir del estado anterior. Es decir, si el estado actual es "ST_UNDEF" y el anterior era "ST_VOICE" se decidirá este último y analógo para *ST_SILENCE*.
+
+	Compilamos y ejecutamos el siguiente comando ejecutar nuestro programa vad con nuestro archivo de audio:
+
+	***~/PAV/P2$ bin/vad -i pav_41101.wav -o pav_41101.vad***
+
+	A continuación realizamos el alineado entre el resultado y la referencia, y calculamos las tasas:
+
+	***~/PAV/P2$ scripts/vad_evaluation.pl pav_41101.lab***
+
+	El resultado es el siguiente:
+
+	<kbd><img src="img/alineado.PNG" align="center"></kbd>
+
+	Como podemos ver las tasas para las tramas de silencio son buenas. No obstante, para el silencio disminuyen sobretodo para el F-score. Este problema alomejor se debe a la potencia de los istantes iniciales de nuestra señal de audio (próximas a 0), ya que el silencio lo determinan estas muestras.
+
+
 - Explique, si existen. las discrepancias entre el etiquetado manual y la detección automática.
+
+	Realizamos una comparación de los ficheros .lab y .vad en el wavesurfer y obtenemos el siguiente resultado:
+
+	<kbd><img src="img/comparacion.PNG" align="center"></kbd>
+
+	Como podemos ver, para los segmentos de voz las etiquetas de la detección automática están bien ubicadas, no obstante, para los segmentos de silencio observamos etiquetas de voz y silencio alternadas.
+	Esto se debe a lo explicado anteriormente con el valor promedio de las primeras muestras de potencia *k0* para nuestro archivo de audio.
 
 - Evalúe los resultados sobre la base de datos `db.v4` con el script `vad_evaluation.pl` e inserte a 
   continuación las tasas de sensibilidad (*recall*) y precisión para el conjunto de la base de datos (sólo
   el resumen).
+
+  <kbd><img src="img/alineado.db4.PNG" align="center"></kbd>
+
+  En este caso, nuestro programa obtiene mejores resultados a partir de los ficheros .wav y sus referencias almacenados en *db.v4*.
   
 
 ### Trabajos de ampliación
